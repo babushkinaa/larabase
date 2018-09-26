@@ -39,7 +39,7 @@ class UserController extends Controller
 
     public function createuser(Request $request)
     {
-//        dd($request->all());
+        dd($request->all());
 
         if ($request->input('password')) :
             $password = Input::get('password');
