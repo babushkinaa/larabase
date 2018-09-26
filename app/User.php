@@ -36,6 +36,7 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+
     // многие ко многим - роли
 
     public function roles()
@@ -90,6 +91,81 @@ class User extends Authenticatable
         if ($request->input('password')):
             $this->user->changePassword($user,$request->password);
         endif;
+    }
+
+    //Отдельный метод для добавления пользователя админом
+
+    public function adminCreateUser($request)
+    {
+
+        if ($request->input('password')) :
+//            $password = Input::get('password');
+            $password = $request->password;
+            $hashed = Hash::make($password);
+        endif;
+
+        if ($request->input('email_verified_at')) :
+            $email_verified = date('Y-m-d H:i:s');
+        endif;
+
+
+
+        $adduser = User::create($request->all());
+
+        $idusers = $adduser->id;
+        if ($request->input('roles')) :
+            $adduser->roles()->attach($request->input('roles'));
+        endif;
+        $tmpuser = $adduser::where('id',$idusers)->first();
+        $tmpuser->password = $hashed;
+
+        if ($request->input('email_verified_at')) :
+            $tmpuser->email_verified_at = $email_verified;
+        endif;
+
+        if ($request->file('image')) :
+            $path = $request->image->store('avatar','public');
+            $tmpuser->image =$path;
+        endif;
+
+        if (!$request->file('image')) :
+            $path = 'avatar/noimage.png';
+            $tmpuser->image =$path;
+        endif;
+
+        $tmpuser->save();
+
+    }
+
+    //Отдельный метод для добавления пользователя админом
+    public function adminUpdateUser($request,$id)
+    {
+        $user = new User();
+        $user = $user->where('id',$id)->first();
+
+        if ($request->file('image') && $user->image !== 'noimage.png'):
+            unlink('storage/'.$user->image);
+        endif;
+
+        $user->update([
+            'username' => $request->uname,
+            'name' => $request->name,
+            'lastname' => $request->lastname,
+            'email' => $request->email,
+        ]);
+        if ($request->file('image')):
+//            $user = $this->user->where('id',$id)->first();
+            $user->update([
+                'image' => $request->image->store('avatar','public')
+            ]);
+        endif;
+        $user->roles()->detach();
+        $user->roles()->attach($request->get('roles'));
+
+        if ($request->input('password')):
+            $this->user->changePassword($user,$request->password);
+        endif;
+
     }
 
 
