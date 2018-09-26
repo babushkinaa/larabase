@@ -7,7 +7,7 @@
 
                     Пользователи</a> <span class="badge">{{$users_count}}</span></li>
             <li class="list-group-item"><a href="{{route('adduser')}}">Добавить полльзователя</a></li>
-            <li class="list-group-item"><a href="{{route('adduser')}}">Рассылка</a></li>
+            <li class="list-group-item"><a href="{{route('role')}}">Роли пользователей</a></li>
             <li class="list-group-item"><a href="{{route('adduser')}}">Поиск</a></li>
         </ul>
     </div>

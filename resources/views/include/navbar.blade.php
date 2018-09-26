@@ -86,8 +86,9 @@
             <div class="col-md-12">
                 <ol class="breadcrumb">
                     <li><a href="{{route('admin')}}">Административный раздел</a></li>
-                    <li><a href="#">Library</a></li>
-                    <li class="active">Data</li>
+                    <li><a href="{{route('users')}}">Пользователи</a></li>
+                    <li><a href="{{route('role')}}">Роли</a></li>
+                    {{--<li class="active">Data</li>--}}
                 </ol>
             </div>
             </div>

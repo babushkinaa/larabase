@@ -14,4 +14,11 @@ class Role extends Model
     {
         $this->belongsToMany('App\User','role_user','role_id','user_id');
     }
+
+    public function getRoles()
+    {
+        $role =new Role();
+//        dd($role);
+        return $role::all();
+    }
 }

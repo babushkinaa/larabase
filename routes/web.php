@@ -30,6 +30,7 @@ Route::prefix('admin')->group(function (){
     Route::get('/edit/{id}','AdminController@edituser')->name('edituser');
     Route::get('/deleteuser/{id}','UserController@deleteUser')->name('deleteuser');
     Route::post('/updateuser/{id}','UserController@updateuser')->name('updateuser');
+    Route::get('/role','AdminController@role')->name('role');
 
 });
 

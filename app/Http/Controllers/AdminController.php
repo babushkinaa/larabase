@@ -48,7 +48,6 @@ class AdminController extends Controller
         ]);
     }
 
-
     public function admin()
     {
         $roles = $this->role::get();
@@ -72,5 +71,15 @@ class AdminController extends Controller
             'id'=>$user->id,
             'user'=>$user
             ]);
+    }
+
+    public function role()
+    {
+        $users_count = $this->user::all()->count();
+        $roles = $this->role->getRoles();
+        return view('admin.role',[
+            'users_count'=>$this->user_count,
+            'roles' => $roles
+        ]);
     }
 }
