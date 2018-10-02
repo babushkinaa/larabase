@@ -54,7 +54,7 @@
     {
 //            confirm('Удалить пользователя?');
         if (confirm('Удалить роль ?')){
-            location.href="{{route('deleteuser',['id'=>$role->id])}}";
+            location.href="{{route('deleterole',['id'=>$role->id])}}";
         }
     }
 </script>

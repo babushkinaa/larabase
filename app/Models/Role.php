@@ -16,7 +16,8 @@ class Role extends Model
 
     public function users()
     {
-        $this->belongsToMany('App\User','role_user','role_id','user_id');
+//        $this->belongsToMany('App\User','role_user','role_id','user_id');
+        $this->belongsToMany(User::class,'role_user','role_id','user_id');
     }
 
     public function getRoles()
@@ -47,5 +48,18 @@ class Role extends Model
     {
         $role = new Role();
         $role->create($request->all());
+    }
+
+    public function deleterole(Role $role)
+    {
+//        $role = new Role();
+//        $role = $this->findRole($id);
+//        dd($this->users());
+//        dd($role);
+        $user =new User();
+        $user=$user->roles()->with('roles',$role->id)->get();
+        dd($user);
+        $role->users()->detach($role->id);
+        $role->destroy($role->id);
     }
 }

@@ -108,10 +108,19 @@ class AdminController extends Controller
                 'users_count'=>$this->user_count,
             ]);
     }
+
     public function newrole(Request $request)
     {
 //        dd($request->all());
         $this->role->addrole($request);
+        return redirect(route('role'));
+    }
+
+    public function deleterole(Role $role,$id)
+    {
+        $role = $this->role->findRole($id);
+//        dd($role);
+        $this->role->deleterole($role,$id);
         return redirect(route('role'));
     }
 }
