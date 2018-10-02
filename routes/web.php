@@ -31,6 +31,11 @@ Route::prefix('admin')->group(function (){
     Route::get('/deleteuser/{id}','UserController@deleteUser')->name('deleteuser');
     Route::post('/updateuser/{id}','UserController@updateuser')->name('updateuser');
     Route::get('/role','AdminController@role')->name('role');
+    Route::get('/role/add','AdminController@addrole')->name('addrole');
+    Route::post('/role/add','AdminController@newrole')->name('newrole');
+    Route::get('/role/edit/{id}','AdminController@editrole')->name('editrole');
+    Route::post('/role/updaterole/{id}','AdminController@updaterole')->name('updaterole');
+    Route::get('/role/delete/{id}','AdminController@deleterole')->name('deleterole');
 
 });
 

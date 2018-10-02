@@ -82,4 +82,36 @@ class AdminController extends Controller
             'roles' => $roles
         ]);
     }
+
+    public function editrole($id)
+    {
+        $users_count = $this->user::all()->count();
+        $role = $this->role->findRole($id);
+//        dd($role);
+        return view('admin.editrole',[
+            'users_count'=>$this->user_count,
+            'role' => $role
+        ]);
+    }
+    public function updaterole(Request $request,$id)
+    {
+//        dd($request->all());
+        $this->role->updateRole($request,$id);
+        return redirect(route('role'));
+    }
+
+    public function addrole()
+    {
+        $users_count = $this->user::all()->count();
+        return view('admin.addrole',
+            [
+                'users_count'=>$this->user_count,
+            ]);
+    }
+    public function newrole(Request $request)
+    {
+//        dd($request->all());
+        $this->role->addrole($request);
+        return redirect(route('role'));
+    }
 }

@@ -1,9 +1,11 @@
 <div class="col-md-9">
 
+
+
     <div class="row col-md-12">
 
         <div class="btn-group" role="group" aria-label="...">
-            <button type="button" class="btn btn-default" onClick='location.href="{{ route('adduser') }}"'>Добавит роль</button>
+            <button type="button" class="btn btn-default" onClick='location.href="{{ route('addrole') }}"'>Добавит роль</button>
             <br>
         </div>
         <hr>
@@ -19,14 +21,14 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($roles as $user)
+        @foreach($roles as $role)
 
             <tr>
-                <td> {{$user->id}} </td>
-                <td> {{$user->name}} </td>
+                <td> {{$role->id}} </td>
+                <td> {{$role->name}} </td>
 
                 <td>
-                    <button type="button" class="btn btn-default" aria-label="Left Align" onClick='location.href="{{route('edituser',['id'=>$user->id])}}"'>
+                    <button type="button" class="btn btn-default" aria-label="Left Align" onClick='location.href="{{route('editrole',['id'=>$role->id])}}"'>
                         <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                     </button>
 
@@ -46,3 +48,13 @@
     </table>
 {{--    {{$users->links()}}--}}
 </div>
+
+<script>
+    function clickEvent()
+    {
+//            confirm('Удалить пользователя?');
+        if (confirm('Удалить роль ?')){
+            location.href="{{route('deleteuser',['id'=>$role->id])}}";
+        }
+    }
+</script>
